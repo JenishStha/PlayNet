@@ -74,6 +74,7 @@ export const likePost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
   try {
+    console.log("Hit delete route");
     const { id } = req.params;
     const post = await Post.findByIdAndDelete(id);
     if (post) {
@@ -82,6 +83,22 @@ export const deletePost = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    res.status(404).json({ message: err.message });
+  }
+};
+export const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    const post = await Post.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+
+    return res.status(200).json({
+      message: "Post updated sucessfully",
+      post,
+    });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };

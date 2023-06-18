@@ -25,6 +25,7 @@ const PostWidget = ({
 }) => {
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
+
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
@@ -44,6 +45,7 @@ const PostWidget = ({
       body: JSON.stringify({ userId: loggedInUserId }),
     });
     const updatedPost = await response.json();
+
     dispatch(setPost({ post: updatedPost }));
   };
 
@@ -51,10 +53,12 @@ const PostWidget = ({
     <WidgetWrapper m="2rem 0">
       <Friend
         friendId={postUserId}
+        postId={postId}
         name={name}
         subtitle={location}
         userPicturePath={userPicturePath}
       />
+
       <Typography color={main} sx={{ mt: "5rem" }}>
         {description}
       </Typography>

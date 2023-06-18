@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import User from "../models/User.js";
+import Post from "../models/Post.js";
 
 const userIds = [
   new mongoose.Types.ObjectId(),
@@ -130,6 +132,22 @@ export const users = [
     lastName: "Dunn",
     email: "jessicadunn@gmail.com",
     password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p9.jpeg",
+    friends: [],
+    location: "Washington, DC",
+    occupation: "A Student",
+    viewedProfile: 19420,
+    impressions: 82970,
+    createdAt: 1369908044,
+    updatedAt: 1359322268,
+    __v: 0,
+  },
+  {
+    _id: userIds[8],
+    firstName: "Jenish",
+    lastName: "Shrestha",
+    email: "test@gmail.com",
+    password: "$2b$10$P5/l5Z43k4.JimRoXppoAubmoCiQhW67v0jUC7gH4A4qYoXl9eYGu",
     picturePath: "p9.jpeg",
     friends: [],
     location: "Washington, DC",
@@ -283,3 +301,20 @@ export const posts = [
     ],
   },
 ];
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/project", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    const seedData = async () => {
+      await User.deleteMany({});
+      await User.insertMany(users);
+      // await Post.insertMany(posts);
+    };
+    seedData().then(() => {
+      console.log("Seed sucessfull");
+    });
+  })
+  .catch((error) => console.log(`${error} did not connect`));
