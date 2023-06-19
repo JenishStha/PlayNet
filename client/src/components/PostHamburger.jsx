@@ -60,7 +60,6 @@ export default function PostHamburger({ postId }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleUpdate}>Update</MenuItem>
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </div>

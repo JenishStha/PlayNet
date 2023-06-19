@@ -309,9 +309,9 @@ mongoose
   })
   .then(() => {
     const seedData = async () => {
-      await User.deleteMany({});
-      await User.insertMany(users);
-      // await Post.insertMany(posts);
+ //     await User.deleteMany({});
+//      await User.insertMany(users);
+   await Post.insertMany(posts);
     };
     seedData().then(() => {
       console.log("Seed sucessfull");
